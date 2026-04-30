@@ -81,3 +81,27 @@ const isTouchDevice =
 if (isTouchDevice) {
   logoContainer.classList.add("active");
 }
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const emailInput = contactForm.querySelector('input[name="email"]');
+    const visitorEmail = emailInput ? emailInput.value.trim() : "";
+
+    if (!visitorEmail) {
+      return;
+    }
+
+    const gmailComposeUrl =
+      "https://mail.google.com/mail/?view=cm&fs=1" +
+      `&to=${encodeURIComponent("rln1102004@gmail.com")}` +
+      `&su=${encodeURIComponent("Portfolio Contact")}` +
+      `&body=${encodeURIComponent(`Hi RLN,\n\nMy email is: ${visitorEmail}\n\n`)}`;
+
+    window.open(gmailComposeUrl, "_blank", "noopener,noreferrer");
+    contactForm.reset();
+  });
+}
